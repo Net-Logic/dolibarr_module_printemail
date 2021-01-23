@@ -30,16 +30,16 @@ include_once DOL_DOCUMENT_ROOT.'/core/modules/printing/modules_printing.php';
  */
 class printing_printemail extends PrintingDriver
 {
-    var $name='printemail';
-    var $desc='PrintEmailDesc';
-    var $picto='printer';
-    var $active='PRINTING_PRINTEMAIL';
-    var $conf=array();
-    var $email;
-    var $printername;
-    var $error;
-    var $errors = array();
-    var $db;
+    public $name = 'printemail';
+    public $desc = 'PrintEmailDesc';
+    public $picto='printer';
+    public $active='PRINTING_PRINTEMAIL';
+    public $conf = array();
+    public $email;
+    public $printername;
+    public $error;
+    public $errors = array();
+    public $db;
 
 
     /**
@@ -54,8 +54,19 @@ class printing_printemail extends PrintingDriver
         $this->db = $db;
         $this->email = $conf->global->PRINTEMAIL_EMAIL;
         $this->printername = $conf->global->PRINTEMAIL_PRINTERNAME;
-        $this->conf[] = array('varname'=>'PRINTEMAIL_EMAIL', 'required'=>1, 'example'=>'someone@somedomain.com', 'type'=>'text', 'moreattributes'=>'autocomplete="off"');
-        $this->conf[] = array('varname'=>'PRINTEMAIL_PRINTERNAME', 'required'=>1, 'example'=>'Printer Name', 'type'=>'text');
+        $this->conf[] = array(
+            'varname'=>'PRINTEMAIL_EMAIL',
+            'required'=>1,
+            'example'=>'someone@somedomain.com',
+            'type'=>'text',
+            'moreattributes'=>'autocomplete="off"',
+        );
+        $this->conf[] = array(
+            'varname'=>'PRINTEMAIL_PRINTERNAME',
+            'required'=>1,
+            'example'=>'Printer Name',
+            'type'=>'text',
+        );
     }
 
     /**
@@ -76,33 +87,29 @@ class printing_printemail extends PrintingDriver
         // select printer uri for module order, propal,...
         $sql = "SELECT rowid,printer_id,copy FROM ".MAIN_DB_PREFIX."printing WHERE module = '".$module."' AND driver = 'printemail' AND userid = ".$user->id;
         $result = $this->db->query($sql);
-        if ($result)
-        {
+        if ($result) {
             $obj = $this->db->fetch_object($result);
-            if ($obj)
-            {
+            if ($obj) {
                 dol_syslog("Found a default printer for user ".$user->id." = ".$obj->printer_id);
                 $sendto = $obj->printer_id;
-            }
-            else
-            {
-                if (! empty($conf->global->PRINTEMAIL_URI_DEFAULT))
-                {
+            } else {
+                if (! empty($conf->global->PRINTEMAIL_URI_DEFAULT)) {
                     dol_syslog("Will use default printer conf->global->PRINTEMAIL_URI_DEFAULT = ".$conf->global->PRINTEMAIL_URI_DEFAULT);
                     $sendto = $conf->global->PRINTEMAIL_URI_DEFAULT;
-                }
-                else
-                {
+                } else {
                     $this->errors[] = 'NoDefaultPrinterDefined';
                     $error++;
                     return $error;
                 }
             }
+        } else {
+            dol_print_error($this->db);
         }
-        else dol_print_error($this->db);
 
-        $fileprint=$conf->{$module}->dir_output;
-        if ($subdir!='') $fileprint.='/'.$subdir;
+        $fileprint = $conf->{$module}->dir_output;
+        if ($subdir!='') {
+            $fileprint.='/'.$subdir;
+        }
         $fileprint.='/'.$file;
 
         // Send mail
@@ -117,21 +124,19 @@ class printing_printemail extends PrintingDriver
 
         $mailfile = new CMailFile($subject,$sendto,$from,$message,$filepath,$mimetype,$filename,$sendtocc,$sendtobcc,$deliveryreceipt,-1,'','',$trackid);
 
-        if ($mailfile->error)
-        {
-            $this->errors[]=$mailfile->error;
-        }
-        else
-        {
+        if ($mailfile->error) {
+            $this->errors[] = $mailfile->error;
+        } else {
             $result = $mailfile->sendfile();
-            if ($result)
-            {
+            if ($result) {
                 $error=0;
                 $this->errors[] = $langs->trans('MailSuccessfulySent',$mailfile->getValidAddress($from,2),$mailfile->getValidAddress($sendto,2));
             }
         }
 
-        if ($error==0) $this->errors[] = 'PRINTEMAIL: Job added';
+        if ($error == 0) {
+            $this->errors[] = 'PRINTEMAIL: Job added';
+        }
 
         return $error;
     }
@@ -161,12 +166,9 @@ class printing_printemail extends PrintingDriver
             $html.= '<td>'.$this->printername.'</td>';
             // Defaut
             $html.= '<td align="center">';
-            if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email)
-            {
+            if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
                 $html.= img_picto($langs->trans("Default"),'on');
-            }
-            else
-            {
+            } else {
                 $html.= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
             }
             $html.= '</td>';
@@ -182,7 +184,7 @@ class printing_printemail extends PrintingDriver
      */
     function getlist_available_printers()
     {
-        if(empty($this->email)) {
+        if (empty($this->email)) {
            // We dont have printers so return blank array
             $ret =  array();
         } else {
