@@ -177,7 +177,7 @@ class printing_printemail extends PrintingDriver
      *
      *  @return array                list of printers
      */
-    function getlist_available_printers()
+    public function getlist_available_printers()
     {
         // phpcs:enable
         if (empty($this->email)) {
