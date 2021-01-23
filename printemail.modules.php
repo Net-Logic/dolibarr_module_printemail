@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2014-2017  Frederic France      <frederic.france@free.fr>
+ * Copyright (C) 2014-2021  Frederic France      <frederic.france@free.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,13 +41,12 @@ class printing_printemail extends PrintingDriver
     public $errors = array();
     public $db;
 
-
     /**
      *  Constructor
      *
      *  @param      DoliDB      $db      Database handler
      */
-    function __construct($db)
+    public function __construct($db)
     {
         global $conf;
 
@@ -69,6 +68,7 @@ class printing_printemail extends PrintingDriver
         );
     }
 
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Print selected file
      *
@@ -78,11 +78,11 @@ class printing_printemail extends PrintingDriver
      *
      * @return  int                     0 if OK, >0 if KO
      */
-    function print_file($file, $module, $subdir='')
+    public function print_file($file, $module, $subdir = '')
     {
+        // phpcs:enable
         global $conf, $user, $langs;
         $error = 0;
-
 
         // select printer uri for module order, propal,...
         $sql = "SELECT rowid,printer_id,copy FROM ".MAIN_DB_PREFIX."printing WHERE module = '".$module."' AND driver = 'printemail' AND userid = ".$user->id;
@@ -122,15 +122,15 @@ class printing_printemail extends PrintingDriver
         $mimetype[0] = 'application/pdf';
         $filename[0] = $file;
 
-        $mailfile = new CMailFile($subject,$sendto,$from,$message,$filepath,$mimetype,$filename,$sendtocc,$sendtobcc,$deliveryreceipt,-1,'','',$trackid);
+        $mailfile = new CMailFile($subject, $sendto, $from, $message, $filepath, $mimetype, $filename, $sendtocc, $sendtobcc, $deliveryreceipt, -1, '', '', $trackid);
 
         if ($mailfile->error) {
             $this->errors[] = $mailfile->error;
         } else {
             $result = $mailfile->sendfile();
             if ($result) {
-                $error=0;
-                $this->errors[] = $langs->trans('MailSuccessfulySent',$mailfile->getValidAddress($from,2),$mailfile->getValidAddress($sendto,2));
+                $error = 0;
+                $this->errors[] = $langs->trans('MailSuccessfulySent', $mailfile->getValidAddress($from, 2), $mailfile->getValidAddress($sendto, 2));
             }
         }
 
@@ -146,56 +146,52 @@ class printing_printemail extends PrintingDriver
      *
      *  @return  int                     0 if OK, >0 if KO
      */
-    function listAvailablePrinters()
+    public function listAvailablePrinters()
     {
-        global $bc, $conf, $langs;
+        global $conf, $langs;
         $error = 0;
-        $var=true;
 
         $html = '<tr class="liste_titre">';
-        $html.= '<td>'.$langs->trans('Email_Uri').'</td>';
-        $html.= '<td>'.$langs->trans('Printer_Name').'</td>';
-        $html.= '<td align="center">'.$langs->trans("Select").'</td>';
-        $html.= "</tr>\n";
-        $var = true;
-        //foreach ($list as $value)
-        //{
-            $var=!$var;
-            $html.= "<tr ".$bc[$var].">";
-            $html.= '<td>'.$this->email.'</td>';
-            $html.= '<td>'.$this->printername.'</td>';
-            // Defaut
-            $html.= '<td align="center">';
-            if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
-                $html.= img_picto($langs->trans("Default"),'on');
-            } else {
-                $html.= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
-            }
-            $html.= '</td>';
-            $html.= '</tr>'."\n";
-        //}
+        $html .= '<td>'.$langs->trans('Email_Uri').'</td>';
+        $html .= '<td>'.$langs->trans('Printer_Name').'</td>';
+        $html .= '<td align="center">'.$langs->trans("Select").'</td>';
+        $html .= "</tr>\n";
+        $html .= '<tr class="oddeven">';
+        $html .= '<td>'.$this->email.'</td>';
+        $html .= '<td>'.$this->printername.'</td>';
+        // Defaut
+        $html .= '<td align="center">';
+        if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
+            $html .= img_picto($langs->trans("Default"), 'on');
+        } else {
+            $html .= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"), 'off').'</a>';
+        }
+        $html .= '</td>';
+        $html .= '</tr>'."\n";
         return $html;
     }
 
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Return list of available printers
      *
      *  @return array                list of printers
      */
-    function getlist_available_printers()
+    public function getlist_available_printers()
     {
+        // phpcs:enable
         if (empty($this->email)) {
-           // We dont have printers so return blank array
+            // We dont have printers so return blank array
             $ret =  array();
         } else {
             // We have printers so returns printers as array
-            $ret[0]=$this->email;
+            $ret[] = $this->email;
         }
-        
+
         return $ret;
     }
 
-
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  List jobs print
      *
@@ -203,8 +199,9 @@ class printing_printemail extends PrintingDriver
      *
      *  @return  int                     0 if OK, >0 if KO
      */
-    function list_jobs($module)
+    public function list_jobs($module)
     {
+        // phpcs:enable
         global $conf, $bc;
         $error = 0;
         $html = '';
@@ -235,5 +232,4 @@ class printing_printemail extends PrintingDriver
         $html .= "</table>";
         print $html;
     }
-
 }
