@@ -78,11 +78,10 @@ class printing_printemail extends PrintingDriver
      *
      * @return  int                     0 if OK, >0 if KO
      */
-    function print_file($file, $module, $subdir = '')
+    public function print_file($file, $module, $subdir = '')
     {
         global $conf, $user, $langs;
         $error = 0;
-
 
         // select printer uri for module order, propal,...
         $sql = "SELECT rowid,printer_id,copy FROM ".MAIN_DB_PREFIX."printing WHERE module = '".$module."' AND driver = 'printemail' AND userid = ".$user->id;
@@ -129,8 +128,8 @@ class printing_printemail extends PrintingDriver
         } else {
             $result = $mailfile->sendfile();
             if ($result) {
-                $error=0;
-                $this->errors[] = $langs->trans('MailSuccessfulySent',$mailfile->getValidAddress($from,2),$mailfile->getValidAddress($sendto,2));
+                $error = 0;
+                $this->errors[] = $langs->trans('MailSuccessfulySent', $mailfile->getValidAddress($from,2), $mailfile->getValidAddress($sendto,2));
             }
         }
 
@@ -150,30 +149,24 @@ class printing_printemail extends PrintingDriver
     {
         global $bc, $conf, $langs;
         $error = 0;
-        $var=true;
 
         $html = '<tr class="liste_titre">';
-        $html.= '<td>'.$langs->trans('Email_Uri').'</td>';
-        $html.= '<td>'.$langs->trans('Printer_Name').'</td>';
-        $html.= '<td align="center">'.$langs->trans("Select").'</td>';
-        $html.= "</tr>\n";
-        $var = true;
-        //foreach ($list as $value)
-        //{
-            $var=!$var;
-            $html.= "<tr ".$bc[$var].">";
-            $html.= '<td>'.$this->email.'</td>';
-            $html.= '<td>'.$this->printername.'</td>';
-            // Defaut
-            $html.= '<td align="center">';
-            if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
-                $html.= img_picto($langs->trans("Default"),'on');
-            } else {
-                $html.= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
-            }
-            $html.= '</td>';
-            $html.= '</tr>'."\n";
-        //}
+        $html .= '<td>'.$langs->trans('Email_Uri').'</td>';
+        $html .= '<td>'.$langs->trans('Printer_Name').'</td>';
+        $html .= '<td align="center">'.$langs->trans("Select").'</td>';
+        $html .= "</tr>\n";
+        $html .= '<tr class="oddeven">';
+        $html .= '<td>'.$this->email.'</td>';
+        $html .= '<td>'.$this->printername.'</td>';
+        // Defaut
+        $html .= '<td align="center">';
+        if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
+            $html .= img_picto($langs->trans("Default"),'on');
+        } else {
+            $html .= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+        }
+        $html .= '</td>';
+        $html .= '</tr>'."\n";
         return $html;
     }
 
@@ -189,7 +182,7 @@ class printing_printemail extends PrintingDriver
             $ret =  array();
         } else {
             // We have printers so returns printers as array
-            $ret[0]=$this->email;
+            $ret[] = $this->email;
         }
         
         return $ret;
