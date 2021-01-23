@@ -186,11 +186,11 @@ class printing_printemail extends PrintingDriver
             // We have printers so returns printers as array
             $ret[] = $this->email;
         }
-        
+ 
         return $ret;
     }
 
-
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  List jobs print
      *
@@ -200,6 +200,7 @@ class printing_printemail extends PrintingDriver
      */
     function list_jobs($module)
     {
+        // phpcs:enable
         global $conf, $bc;
         $error = 0;
         $html = '';
