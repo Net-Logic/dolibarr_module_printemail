@@ -69,6 +69,7 @@ class printing_printemail extends PrintingDriver
         );
     }
 
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Print selected file
      *
@@ -80,6 +81,7 @@ class printing_printemail extends PrintingDriver
      */
     public function print_file($file, $module, $subdir = '')
     {
+        // phpcs:enable
         global $conf, $user, $langs;
         $error = 0;
 
@@ -129,7 +131,7 @@ class printing_printemail extends PrintingDriver
             $result = $mailfile->sendfile();
             if ($result) {
                 $error = 0;
-                $this->errors[] = $langs->trans('MailSuccessfulySent', $mailfile->getValidAddress($from,2), $mailfile->getValidAddress($sendto,2));
+                $this->errors[] = $langs->trans('MailSuccessfulySent', $mailfile->getValidAddress($from, 2), $mailfile->getValidAddress($sendto, 2));
             }
         }
 
