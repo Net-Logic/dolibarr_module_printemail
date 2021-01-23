@@ -142,6 +142,7 @@ class printing_printemail extends PrintingDriver
         return $error;
     }
 
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Return list of available printers
      *
@@ -149,6 +150,7 @@ class printing_printemail extends PrintingDriver
      */
     function listAvailablePrinters()
     {
+        // phpcs:enable
         global $bc, $conf, $langs;
         $error = 0;
 
@@ -163,15 +165,16 @@ class printing_printemail extends PrintingDriver
         // Defaut
         $html .= '<td align="center">';
         if ($conf->global->PRINTEMAIL_URI_DEFAULT == $this->email) {
-            $html .= img_picto($langs->trans("Default"),'on');
+            $html .= img_picto($langs->trans("Default"), 'on');
         } else {
-            $html .= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"),'off').'</a>';
+            $html .= '<a href="'.$_SERVER["PHP_SELF"].'?action=setvalue&amp;mode=test&amp;varname=PRINTEMAIL_URI_DEFAULT&amp;driver=printemail&amp;value='.urlencode($this->email).'" alt="'.$langs->trans("Default").'">'.img_picto($langs->trans("Disabled"), 'off').'</a>';
         }
         $html .= '</td>';
         $html .= '</tr>'."\n";
         return $html;
     }
 
+    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Return list of available printers
      *
@@ -179,6 +182,7 @@ class printing_printemail extends PrintingDriver
      */
     function getlist_available_printers()
     {
+        // phpcs:enable
         if (empty($this->email)) {
            // We dont have printers so return blank array
             $ret =  array();
@@ -186,7 +190,7 @@ class printing_printemail extends PrintingDriver
             // We have printers so returns printers as array
             $ret[] = $this->email;
         }
- 
+
         return $ret;
     }
 
@@ -198,7 +202,7 @@ class printing_printemail extends PrintingDriver
      *
      *  @return  int                     0 if OK, >0 if KO
      */
-    function list_jobs($module)
+    public function list_jobs($module)
     {
         // phpcs:enable
         global $conf, $bc;
