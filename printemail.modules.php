@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2014-2017  Frederic France      <frederic.france@free.fr>
+ * Copyright (C) 2014-2021  Frederic France      <frederic.france@free.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class printing_printemail extends PrintingDriver
      *
      *  @param      DoliDB      $db      Database handler
      */
-    function __construct($db)
+    public function __construct($db)
     {
         global $conf;
 
@@ -78,7 +78,7 @@ class printing_printemail extends PrintingDriver
      *
      * @return  int                     0 if OK, >0 if KO
      */
-    function print_file($file, $module, $subdir='')
+    function print_file($file, $module, $subdir = '')
     {
         global $conf, $user, $langs;
         $error = 0;
@@ -122,7 +122,7 @@ class printing_printemail extends PrintingDriver
         $mimetype[0] = 'application/pdf';
         $filename[0] = $file;
 
-        $mailfile = new CMailFile($subject,$sendto,$from,$message,$filepath,$mimetype,$filename,$sendtocc,$sendtobcc,$deliveryreceipt,-1,'','',$trackid);
+        $mailfile = new CMailFile($subject, $sendto, $from, $message, $filepath, $mimetype, $filename, $sendtocc, $sendtobcc, $deliveryreceipt, -1, '', '', $trackid);
 
         if ($mailfile->error) {
             $this->errors[] = $mailfile->error;
@@ -235,5 +235,4 @@ class printing_printemail extends PrintingDriver
         $html .= "</table>";
         print $html;
     }
-
 }
