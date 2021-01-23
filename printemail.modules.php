@@ -41,7 +41,6 @@ class printing_printemail extends PrintingDriver
     public $errors = array();
     public $db;
 
-
     /**
      *  Constructor
      *
@@ -142,16 +141,14 @@ class printing_printemail extends PrintingDriver
         return $error;
     }
 
-    // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
     /**
      *  Return list of available printers
      *
      *  @return  int                     0 if OK, >0 if KO
      */
-    function listAvailablePrinters()
+    public function listAvailablePrinters()
     {
-        // phpcs:enable
-        global $bc, $conf, $langs;
+        global $conf, $langs;
         $error = 0;
 
         $html = '<tr class="liste_titre">';
@@ -184,7 +181,7 @@ class printing_printemail extends PrintingDriver
     {
         // phpcs:enable
         if (empty($this->email)) {
-           // We dont have printers so return blank array
+            // We dont have printers so return blank array
             $ret =  array();
         } else {
             // We have printers so returns printers as array
