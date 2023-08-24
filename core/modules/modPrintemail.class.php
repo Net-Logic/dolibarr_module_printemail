@@ -28,11 +28,13 @@
  */
 include_once DOL_DOCUMENT_ROOT . '/core/modules/DolibarrModules.class.php';
 
+// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 /**
  *  Description and activation class for module Printemail
  */
 class modPrintemail extends DolibarrModules
 {
+	// phpcs:enable
 	/**
 	 * Constructor. Define names, constants, directories, boxes, permissions
 	 *
@@ -123,8 +125,6 @@ class modPrintemail extends DolibarrModules
 		// Messages at activation
 		$this->warnings_activation = []; // Warning to show when we activate module. array('always'='text') or array('FR'='textfr','MX'='textmx'...)
 		$this->warnings_activation_ext = []; // Warning to show when we activate an external module. array('always'='text') or array('FR'='textfr','MX'='textmx'...)
-		//$this->automatic_activation = array('FR'=>'PrintemailWasAutomaticallyActivatedBecauseOfYourCountryChoice');
-		//$this->always_enabled = true;								// If true, can't be disabled
 
 		// Constants
 
@@ -137,74 +137,12 @@ class modPrintemail extends DolibarrModules
 
 		// Array to add new pages in new tabs
 		$this->tabs = [];
-		// Example:
-		// $this->tabs[] = array('data'=>'objecttype:+tabname1:Title1:mylangfile@printemail:$user->rights->printemail->read:/printemail/mynewtab1.php?id=__ID__');  					// To add a new tab identified by code tabname1
-		// $this->tabs[] = array('data'=>'objecttype:+tabname2:SUBSTITUTION_Title2:mylangfile@printemail:$user->rights->othermodule->read:/printemail/mynewtab2.php?id=__ID__',  	// To add another new tab identified by code tabname2. Label will be result of calling all substitution functions on 'Title2' key.
-		// $this->tabs[] = array('data'=>'objecttype:-tabname:NU:conditiontoremove');                                                     										// To remove an existing tab identified by code tabname
-		//
-		// Where objecttype can be
-		// 'categories_x'	  to add a tab in category view (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
-		// 'contact'          to add a tab in contact view
-		// 'contract'         to add a tab in contract view
-		// 'group'            to add a tab in group view
-		// 'intervention'     to add a tab in intervention view
-		// 'invoice'          to add a tab in customer invoice view
-		// 'invoice_supplier' to add a tab in supplier invoice view
-		// 'member'           to add a tab in fundation member view
-		// 'opensurveypoll'	  to add a tab in opensurvey poll view
-		// 'order'            to add a tab in sale order view
-		// 'order_supplier'   to add a tab in supplier order view
-		// 'payment'		  to add a tab in payment view
-		// 'payment_supplier' to add a tab in supplier payment view
-		// 'product'          to add a tab in product view
-		// 'propal'           to add a tab in propal view
-		// 'project'          to add a tab in project view
-		// 'stock'            to add a tab in stock view
-		// 'thirdparty'       to add a tab in third party view
-		// 'user'             to add a tab in user view
 
 		// Dictionaries
-		/* Example:
-		 $this->dictionaries=array(
-		 'langs'=>'printemail@printemail',
-		 // List of tables we want to see into dictonnary editor
-		 'tabname'=>array("table1", "table2", "table3"),
-		 // Label of tables
-		 'tablib'=>array("Table1", "Table2", "Table3"),
-		 // Request to select fields
-		 'tabsql'=>array('SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table1 as f', 'SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table2 as f', 'SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'table3 as f'),
-		 // Sort order
-		 'tabsqlsort'=>array("label ASC", "label ASC", "label ASC"),
-		 // List of fields (result of select to show dictionary)
-		 'tabfield'=>array("code,label", "code,label", "code,label"),
-		 // List of fields (list of fields to edit a record)
-		 'tabfieldvalue'=>array("code,label", "code,label", "code,label"),
-		 // List of fields (list of fields for insert)
-		 'tabfieldinsert'=>array("code,label", "code,label", "code,label"),
-		 // Name of columns with primary key (try to always name it 'rowid')
-		 'tabrowid'=>array("rowid", "rowid", "rowid"),
-		 // Condition to show each dictionary
-		 'tabcond'=>array(isModEnabled('printemail'), isModEnabled('printemail'), isModEnabled('printemail')),
-		 // Tooltip for every fields of dictionaries: DO NOT PUT AN EMPTY ARRAY
-		 'tabhelp'=>array(array('code'=>$langs->trans('CodeTooltipHelp'), 'field2' => 'field2tooltip'), array('code'=>$langs->trans('CodeTooltipHelp'), 'field2' => 'field2tooltip'), ...),
-		 );
-		 */
-		/* BEGIN MODULEBUILDER DICTIONARIES */
 		$this->dictionaries = [];
-		/* END MODULEBUILDER DICTIONARIES */
 
 		// Boxes/Widgets
-		// Add here list of php file(s) stored in printemail/core/boxes that contains a class to show a widget.
-		/* BEGIN MODULEBUILDER WIDGETS */
-		$this->boxes = [
-			//  0 => array(
-			//      'file' => 'printemailwidget1.php@printemail',
-			//      'note' => 'Widget provided by Printemail',
-			//      'enabledbydefaulton' => 'Home',
-			//  ),
-			//  ...
-		];
-		/* END MODULEBUILDER WIDGETS */
+		$this->boxes = [];
 
 		// Cronjobs (List of cron jobs entries to add when module is enabled)
 		// unit_frequency must be 60 for minute, 3600 for hour, 86400 for day, 604800 for week

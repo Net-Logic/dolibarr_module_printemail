@@ -25,11 +25,13 @@
 
 include_once DOL_DOCUMENT_ROOT . '/core/modules/printing/modules_printing.php';
 
+// phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 /**
  *   Class to provide printing with Email
  */
 class printing_printemail extends PrintingDriver
 {
+	// phpcs:enable
 	public $name = 'printemail';
 	public $desc = 'PrintEmailDesc';
 	public $picto = 'printer';
@@ -200,7 +202,7 @@ class printing_printemail extends PrintingDriver
 			// We have printers so returns printers as array
 			$ret[] = $this->email;
 		}
-		var_dump($ret);
+
 		return $ret;
 	}
 
@@ -212,7 +214,7 @@ class printing_printemail extends PrintingDriver
 	 *
 	 *  @return  int                     0 if OK, >0 if KO
 	 */
-	public function list_jobs($module)
+	public function listJobs($module)
 	{
 		// phpcs:enable
 		global $conf, $bc;
