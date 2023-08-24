@@ -1,0 +1,9 @@
+# Generated binaries
+/build/printemail/
+# Composer managed dependencies
+/vendor
+/.settings/
+/.buildpath
+# Other
+*.back
+.gitattributes
