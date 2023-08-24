@@ -1,0 +1,14 @@
+{
+  "name": "printemail",
+  "changelog": {
+    "repo": "Net-Logic/dolibarr_module_printemail",
+    "labels": {
+      "nextVersion": "Unreleased",
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  }
+}
