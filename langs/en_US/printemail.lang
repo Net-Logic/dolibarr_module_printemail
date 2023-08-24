@@ -52,3 +52,10 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
+ModuleMyModuleName=MyModule
+ModuleMyModuleDesc=MyModule description
+MyModuleSetup=MyModule setup
+MyModuleSetupPage=MyModule setup page
+MyModuleAbout=About MyModule
+MyModuleAboutPage=MyModule about page
+PrintEmailDesc=This driver allows documents to be sent directly to a printer. It requires a printer that can receive the document by email.
