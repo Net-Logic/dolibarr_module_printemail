@@ -24,14 +24,14 @@ ModulePrintemailDesc = Ce module permet d'envoyer les documents directement à u
 #
 # Admin page
 #
-MyModuleSetup = MyModule setup
+PrintemailSetup = Printemail setup
 Settings = Settings
 
 #
 # About page
 #
 About = About
-MyModuleAbout = About MyModule
-MyModuleAboutPage = MyModule about page
+PrintemailAbout = About Printemail
+PrintemailAboutPage = Printemail about page
 
 PrintEmailDesc=Ce driver permet d'envoyer les documents directement à une imprimante. Il requiert une imprimate pouvant recevoir le document par email.

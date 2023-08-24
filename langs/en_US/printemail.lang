@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Frédéric France 
+# Copyright (C) 2023 Frédéric France
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,45 +17,7 @@
 # Generic
 #
 
-# Module label 'ModulePrintemailName'
 ModulePrintemailName = Printemail
-# Module description 'ModulePrintemailDesc'
-ModulePrintemailDesc = Printemail description
-
-#
-# Admin page
-#
 PrintemailSetup = Printemail setup
 Settings = Settings
-PrintemailSetupPage = Printemail setup page
-PRINTEMAIL_MYPARAM1 = My param 1
-PRINTEMAIL_MYPARAM1Tooltip = My param 1 tooltip
-PRINTEMAIL_MYPARAM2=My param 2
-PRINTEMAIL_MYPARAM2Tooltip=My param 2 tooltip
-
-
-#
-# About page
-#
-About = About
-PrintemailAbout = About Printemail
-PrintemailAboutPage = Printemail about page
-
-#
-# Sample page
-#
-PrintemailArea = Home Printemail
-MyPageName = My page name
-
-#
-# Sample widget
-#
-MyWidget = My widget
-MyWidgetDescription = My widget description
-ModuleMyModuleName=MyModule
-ModuleMyModuleDesc=MyModule description
-MyModuleSetup=MyModule setup
-MyModuleSetupPage=MyModule setup page
-MyModuleAbout=About MyModule
-MyModuleAboutPage=MyModule about page
 PrintEmailDesc=This driver allows documents to be sent directly to a printer. It requires a printer that can receive the document by email.
