@@ -26,7 +26,7 @@
  *  \ingroup    printemail
  *  \brief      Description and activation file for module Printemail
  */
-include_once DOL_DOCUMENT_ROOT.'/core/modules/DolibarrModules.class.php';
+include_once DOL_DOCUMENT_ROOT . '/core/modules/DolibarrModules.class.php';
 
 /**
  *  Description and activation class for module Printemail
@@ -79,7 +79,7 @@ class modPrintemail extends DolibarrModules
 		$this->url_last_version = $url;
 
 		// Key used in llx_const table to save module status enabled/disabled (where PRINTEMAIL is value of property name of module in uppercase)
-		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
+		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 
 		// Name of image file used for this module.
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
@@ -384,19 +384,19 @@ class modPrintemail extends DolibarrModules
 		// Document templates
 		$moduledir = dol_sanitizeFileName('printemail');
 		$myTmpObjects = [];
-		$myTmpObjects['MyObject'] = ['includerefgeneration'=>0, 'includedocgeneration'=>0];
+		$myTmpObjects['MyObject'] = ['includerefgeneration' => 0, 'includedocgeneration' => 0];
 
 		foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 			if ($myTmpObjectKey == 'MyObject') {
 				continue;
 			}
 			if ($myTmpObjectArray['includerefgeneration']) {
-				$src = DOL_DOCUMENT_ROOT.'/install/doctemplates/'.$moduledir.'/template_myobjects.odt';
-				$dirodt = DOL_DATA_ROOT.'/doctemplates/'.$moduledir;
-				$dest = $dirodt.'/template_myobjects.odt';
+				$src = DOL_DOCUMENT_ROOT . '/install/doctemplates/' . $moduledir . '/template_myobjects.odt';
+				$dirodt = DOL_DATA_ROOT . '/doctemplates/' . $moduledir;
+				$dest = $dirodt . '/template_myobjects.odt';
 
 				if (file_exists($src) && !file_exists($dest)) {
-					require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
+					require_once DOL_DOCUMENT_ROOT . '/core/lib/files.lib.php';
 					dol_mkdir($dirodt);
 					$result = dol_copy($src, $dest, 0, 0);
 					if ($result < 0) {
@@ -407,10 +407,10 @@ class modPrintemail extends DolibarrModules
 				}
 
 				$sql = array_merge($sql, [
-					"DELETE FROM ".MAIN_DB_PREFIX."document_model WHERE nom = 'standard_".strtolower($myTmpObjectKey)."' AND type = '".$this->db->escape(strtolower($myTmpObjectKey))."' AND entity = ".((int) $conf->entity),
-					"INSERT INTO ".MAIN_DB_PREFIX."document_model (nom, type, entity) VALUES('standard_".strtolower($myTmpObjectKey)."', '".$this->db->escape(strtolower($myTmpObjectKey))."', ".((int) $conf->entity).")",
-					"DELETE FROM ".MAIN_DB_PREFIX."document_model WHERE nom = 'generic_".strtolower($myTmpObjectKey)."_odt' AND type = '".$this->db->escape(strtolower($myTmpObjectKey))."' AND entity = ".((int) $conf->entity),
-					"INSERT INTO ".MAIN_DB_PREFIX."document_model (nom, type, entity) VALUES('generic_".strtolower($myTmpObjectKey)."_odt', '".$this->db->escape(strtolower($myTmpObjectKey))."', ".((int) $conf->entity).")"
+					"DELETE FROM " . MAIN_DB_PREFIX . "document_model WHERE nom = 'standard_" . strtolower($myTmpObjectKey) . "' AND type = '" . $this->db->escape(strtolower($myTmpObjectKey)) . "' AND entity = " . ((int) $conf->entity),
+					"INSERT INTO " . MAIN_DB_PREFIX . "document_model (nom, type, entity) VALUES('standard_" . strtolower($myTmpObjectKey) . "', '" . $this->db->escape(strtolower($myTmpObjectKey)) . "', " . ((int) $conf->entity) . ")",
+					"DELETE FROM " . MAIN_DB_PREFIX . "document_model WHERE nom = 'generic_" . strtolower($myTmpObjectKey) . "_odt' AND type = '" . $this->db->escape(strtolower($myTmpObjectKey)) . "' AND entity = " . ((int) $conf->entity),
+					"INSERT INTO " . MAIN_DB_PREFIX . "document_model (nom, type, entity) VALUES('generic_" . strtolower($myTmpObjectKey) . "_odt', '" . $this->db->escape(strtolower($myTmpObjectKey)) . "', " . ((int) $conf->entity) . ")"
 				]);
 			}
 		}

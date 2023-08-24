@@ -112,7 +112,7 @@ class FormSetup
 	 * @param 	array 	$attributes 	an array of attributes keys and values,
 	 * @return 	string					attribute string
 	 */
-	static public function generateAttributesStringFromArray($attributes)
+	public static function generateAttributesStringFromArray($attributes)
 	{
 		$Aattr = [];
 		if (is_array($attributes)) {
@@ -120,11 +120,11 @@ class FormSetup
 				if (is_array($value) || is_object($value)) {
 					continue;
 				}
-				$Aattr[] = $attribute.'="'.dol_escape_htmltag($value).'"';
+				$Aattr[] = $attribute . '="' . dol_escape_htmltag($value) . '"';
 			}
 		}
 
-		return !empty($Aattr)?implode(' ', $Aattr):'';
+		return !empty($Aattr) ? implode(' ', $Aattr) : '';
 	}
 
 
@@ -137,7 +137,7 @@ class FormSetup
 	public function generateOutput($editMode = false)
 	{
 		global $hookmanager, $action, $langs;
-		require_once DOL_DOCUMENT_ROOT.'/core/class/html.form.class.php';
+		require_once DOL_DOCUMENT_ROOT . '/core/class/html.form.class.php';
 
 		$parameters = [
 			'editMode' => $editMode
@@ -151,15 +151,15 @@ class FormSetup
 			return $hookmanager->resPrint;
 		} else {
 			$out = '<!-- Start generateOutput from FormSetup class  -->';
-			$out.= $this->htmlBeforeOutputForm;
+			$out .= $this->htmlBeforeOutputForm;
 
 			if ($editMode) {
-				$out.= '<form ' . self::generateAttributesStringFromArray($this->formAttributes) . ' >';
+				$out .= '<form ' . self::generateAttributesStringFromArray($this->formAttributes) . ' >';
 
 				// generate hidden values from $this->formHiddenInputs
 				if (!empty($this->formHiddenInputs) && is_array($this->formHiddenInputs)) {
 					foreach ($this->formHiddenInputs as $hiddenKey => $hiddenValue) {
-						$out.= '<input type="hidden" name="'.dol_escape_htmltag($hiddenKey).'" value="' . dol_escape_htmltag($hiddenValue) . '">';
+						$out .= '<input type="hidden" name="' . dol_escape_htmltag($hiddenKey) . '" value="' . dol_escape_htmltag($hiddenValue) . '">';
 					}
 				}
 			}
@@ -178,10 +178,10 @@ class FormSetup
 			} elseif ($editMode) {
 				$out .= '<br>'; // Todo : remove this <br/> by adding style to form-setup-button-container css class in all themes
 				$out .= '<div class="form-setup-button-container center">'; // Todo : remove .center by adding style to form-setup-button-container css class in all themes
-				$out.= $this->htmlOutputMoreButton;
+				$out .= $this->htmlOutputMoreButton;
 				$out .= '<input class="button button-save" type="submit" value="' . $this->langs->trans("Save") . '">'; // Todo fix dolibarr style for <button and use <button instead of input
 				$out .= ' &nbsp;&nbsp; ';
-				$out .= '<a class="button button-cancel" type="submit" href="' . $this->formAttributes['action'] . '">'.$langs->trans('Cancel').'</a>';
+				$out .= '<a class="button button-cancel" type="submit" href="' . $this->formAttributes['action'] . '">' . $langs->trans('Cancel') . '</a>';
 				$out .= '</div>';
 			}
 
@@ -189,7 +189,7 @@ class FormSetup
 				$out .= '</form>';
 			}
 
-			$out.= $this->htmlAfterOutputForm;
+			$out .= $this->htmlAfterOutputForm;
 
 			return $out;
 		}
@@ -204,7 +204,7 @@ class FormSetup
 	public function generateTableOutput($editMode = false)
 	{
 		global $hookmanager, $action;
-		require_once DOL_DOCUMENT_ROOT.'/core/class/html.form.class.php';
+		require_once DOL_DOCUMENT_ROOT . '/core/class/html.form.class.php';
 
 		$parameters = [
 			'editMode' => $editMode
@@ -307,27 +307,27 @@ class FormSetup
 	{
 
 		$out = '';
-		if ($item->enabled==1) {
+		if ($item->enabled == 1) {
 			$trClass = 'oddeven';
 			if ($item->getType() == 'title') {
 				$trClass = 'liste_titre';
 			}
 
 			$this->setupNotEmpty++;
-			$out.= '<tr class="'.$trClass.'">';
+			$out .= '<tr class="' . $trClass . '">';
 
-			$out.= '<td class="col-setup-title">';
-			$out.= '<span id="helplink'.$item->confKey.'" class="spanforparamtooltip">';
-			$out.= $this->form->textwithpicto($item->getNameText(), $item->getHelpText(), 1, 'info', '', 0, 3, 'tootips'.$item->confKey);
-			$out.= '</span>';
-			$out.= '</td>';
+			$out .= '<td class="col-setup-title">';
+			$out .= '<span id="helplink' . $item->confKey . '" class="spanforparamtooltip">';
+			$out .= $this->form->textwithpicto($item->getNameText(), $item->getHelpText(), 1, 'info', '', 0, 3, 'tootips' . $item->confKey);
+			$out .= '</span>';
+			$out .= '</td>';
 
-			$out.= '<td>';
+			$out .= '<td>';
 
 			if ($editMode) {
-				$out.= $item->generateInputField();
+				$out .= $item->generateInputField();
 			} else {
-				$out.= $item->generateOutputField();
+				$out .= $item->generateOutputField();
 			}
 
 			if (!empty($item->errors)) {
@@ -335,8 +335,8 @@ class FormSetup
 				setEventMessages(null, $item->errors, 'errors');
 			}
 
-			$out.= '</td>';
-			$out.= '</tr>';
+			$out .= '</td>';
+			$out .= '</tr>';
 		}
 
 		return $out;
@@ -351,7 +351,9 @@ class FormSetup
 	 */
 	public function addItemsFromParamsArray($params)
 	{
-		if (!is_array($params) || empty($params)) { return false; }
+		if (!is_array($params) || empty($params)) {
+			return false;
+		}
 		foreach ($params as $confKey => $param) {
 			$this->addItemFromParams($confKey, $param); // todo manage error
 		}
@@ -369,7 +371,9 @@ class FormSetup
 	 */
 	public function addItemFromParams($confKey, $params)
 	{
-		if (empty($confKey) || empty($params['type'])) { return false; }
+		if (empty($confKey) || empty($params['type'])) {
+			return false;
+		}
 
 		/*
 		 * Exemple from old module builder setup page
@@ -428,7 +432,9 @@ class FormSetup
 	public function reloadConfs()
 	{
 
-		if (![$this->items]) { return false; }
+		if (![$this->items]) {
+			return false;
+		}
 		foreach ($this->items as $item) {
 			$item->loadValueFromConf();
 		}
@@ -794,7 +800,9 @@ class FormSetupItem
 	 */
 	public function getHelpText()
 	{
-		if (!empty($this->helpText)) { return $this->helpText; }
+		if (!empty($this->helpText)) {
+			return $this->helpText;
+		}
 		return (($this->langs->trans($this->confKey . 'Tooltip') != $this->confKey . 'Tooltip') ? $this->langs->trans($this->confKey . 'Tooltip') : '');
 	}
 
@@ -804,7 +812,9 @@ class FormSetupItem
 	 */
 	public function getNameText()
 	{
-		if (!empty($this->nameText)) { return $this->nameText; }
+		if (!empty($this->nameText)) {
+			return $this->nameText;
+		}
 		return (($this->langs->trans($this->confKey) != $this->confKey) ? $this->langs->trans($this->confKey) : $this->langs->trans('MissingTranslationForConfKey', $this->confKey));
 	}
 
@@ -831,48 +841,48 @@ class FormSetupItem
 
 
 		$this->fieldAttr['name'] = $this->confKey;
-		$this->fieldAttr['id'] = 'setup-'.$this->confKey;
+		$this->fieldAttr['id'] = 'setup-' . $this->confKey;
 		$this->fieldAttr['value'] = $this->fieldValue;
 
 		$out = '';
 
 		if ($this->type == 'title') {
-			$out.= $this->generateOutputField(); // title have no input
+			$out .= $this->generateOutputField(); // title have no input
 		} elseif ($this->type == 'multiselect') {
-			$out.= $this->generateInputFieldMultiSelect();
+			$out .= $this->generateInputFieldMultiSelect();
 		} elseif ($this->type == 'select') {
-			$out.= $this->generateInputFieldSelect();
+			$out .= $this->generateInputFieldSelect();
 		} elseif ($this->type == 'selectUser') {
-			$out.= $this->generateInputFieldSelectUser();
+			$out .= $this->generateInputFieldSelectUser();
 		} elseif ($this->type == 'textarea') {
-			$out.= $this->generateInputFieldTextarea();
-		} elseif ($this->type== 'html') {
-			$out.= $this->generateInputFieldHtml();
-		} elseif ($this->type== 'color') {
-			$out.=  $this->generateInputFieldColor();
+			$out .= $this->generateInputFieldTextarea();
+		} elseif ($this->type == 'html') {
+			$out .= $this->generateInputFieldHtml();
+		} elseif ($this->type == 'color') {
+			$out .=  $this->generateInputFieldColor();
 		} elseif ($this->type == 'yesno') {
 			if (!empty($conf->use_javascript_ajax)) {
-				$out.= ajax_constantonoff($this->confKey);
+				$out .= ajax_constantonoff($this->confKey);
 			} else {
-				$out.= $this->form->selectyesno($this->confKey, $this->fieldValue, 1);
+				$out .= $this->form->selectyesno($this->confKey, $this->fieldValue, 1);
 			}
 		} elseif (preg_match('/emailtemplate:/', $this->type)) {
-			$out.= $this->generateInputFieldEmailTemplate();
+			$out .= $this->generateInputFieldEmailTemplate();
 		} elseif (preg_match('/category:/', $this->type)) {
-			$out.=$this->generateInputFieldCategories();
+			$out .= $this->generateInputFieldCategories();
 		} elseif (preg_match('/thirdparty_type/', $this->type)) {
-			require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
+			require_once DOL_DOCUMENT_ROOT . '/core/class/html.formcompany.class.php';
 			$formcompany = new FormCompany($this->db);
-			$out.= $formcompany->selectProspectCustomerType($this->fieldValue, $this->confKey);
+			$out .= $formcompany->selectProspectCustomerType($this->fieldValue, $this->confKey);
 		} elseif ($this->type == 'securekey') {
-			$out.= $this->generateInputFieldSecureKey();
+			$out .= $this->generateInputFieldSecureKey();
 		} elseif ($this->type == 'product') {
 			if (isModEnabled("product") || isModEnabled("service")) {
 				$selected = (empty($this->fieldValue) ? '' : $this->fieldValue);
-				$out.= $this->form->select_produits($selected, $this->confKey, '', 0, 0, 1, 2, '', 0, [], 0, '1', 0, $this->cssClass, 0, '', null, 1);
+				$out .= $this->form->select_produits($selected, $this->confKey, '', 0, 0, 1, 2, '', 0, [], 0, '1', 0, $this->cssClass, 0, '', null, 1);
 			}
 		} else {
-			$out.= $this->generateInputFieldText();
+			$out .= $this->generateInputFieldText();
 		}
 
 		return $out;
@@ -884,8 +894,10 @@ class FormSetupItem
 	 */
 	public function generateInputFieldText()
 	{
-		if (empty($this->fieldAttr)) { $this->fieldAttr['class'] = 'flat '.(empty($this->cssClass) ? 'minwidth200' : $this->cssClass); }
-		return '<input '.FormSetup::generateAttributesStringFromArray($this->fieldAttr).' />';
+		if (empty($this->fieldAttr)) {
+			$this->fieldAttr['class'] = 'flat ' . (empty($this->cssClass) ? 'minwidth200' : $this->cssClass);
+		}
+		return '<input ' . FormSetup::generateAttributesStringFromArray($this->fieldAttr) . ' />';
 	}
 
 	/**
@@ -894,9 +906,9 @@ class FormSetupItem
 	 */
 	public function generateInputFieldTextarea()
 	{
-		$out = '<textarea class="flat" name="'.$this->confKey.'" id="'.$this->confKey.'" cols="50" rows="5" wrap="soft">' . "\n";
-		$out.= dol_htmlentities($this->fieldValue);
-		$out.= "</textarea>\n";
+		$out = '<textarea class="flat" name="' . $this->confKey . '" id="' . $this->confKey . '" cols="50" rows="5" wrap="soft">' . "\n";
+		$out .= dol_htmlentities($this->fieldValue);
+		$out .= "</textarea>\n";
 		return $out;
 	}
 
@@ -919,13 +931,13 @@ class FormSetupItem
 	public function generateInputFieldCategories()
 	{
 		global $conf;
-		require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
-		require_once DOL_DOCUMENT_ROOT.'/core/class/html.formother.class.php';
+		require_once DOL_DOCUMENT_ROOT . '/categories/class/categorie.class.php';
+		require_once DOL_DOCUMENT_ROOT . '/core/class/html.formother.class.php';
 		$formother = new FormOther($this->db);
 
 		$tmp = explode(':', $this->type);
-		$out= img_picto('', 'category', 'class="pictofixedwidth"');
-		$out.= $formother->select_categories($tmp[1],  $this->fieldValue, $this->confKey, 0, $this->langs->trans('CustomersProspectsCategoriesShort'));
+		$out = img_picto('', 'category', 'class="pictofixedwidth"');
+		$out .= $formother->select_categories($tmp[1], $this->fieldValue, $this->confKey, 0, $this->langs->trans('CustomersProspectsCategoriesShort'));
 		return $out;
 	}
 
@@ -968,14 +980,14 @@ class FormSetupItem
 	public function generateInputFieldSecureKey()
 	{
 		global $conf;
-		$out = '<input required="required" type="text" class="flat" id="'.$this->confKey.'" name="'.$this->confKey.'" value="'.(GETPOST($this->confKey, 'alpha') ?GETPOST($this->confKey, 'alpha') : $this->fieldValue).'" size="40">';
+		$out = '<input required="required" type="text" class="flat" id="' . $this->confKey . '" name="' . $this->confKey . '" value="' . (GETPOST($this->confKey, 'alpha') ? GETPOST($this->confKey, 'alpha') : $this->fieldValue) . '" size="40">';
 		if (!empty($conf->use_javascript_ajax)) {
-			$out.= '&nbsp;'.img_picto($this->langs->trans('Generate'), 'refresh', 'id="generate_token'.$this->confKey.'" class="linkobject"');
+			$out .= '&nbsp;' . img_picto($this->langs->trans('Generate'), 'refresh', 'id="generate_token' . $this->confKey . '" class="linkobject"');
 		}
 
 		// Add button to autosuggest a key
-		include_once DOL_DOCUMENT_ROOT.'/core/lib/security2.lib.php';
-		$out .= dolJSToSetRandomPassword($this->confKey, 'generate_token'.$this->confKey);
+		include_once DOL_DOCUMENT_ROOT . '/core/lib/security2.lib.php';
+		$out .= dolJSToSetRandomPassword($this->confKey, 'generate_token' . $this->confKey);
 
 		return $out;
 	}
@@ -1080,25 +1092,25 @@ class FormSetupItem
 		if ($this->type == 'title') {
 			// nothing to do
 		} elseif ($this->type == 'textarea') {
-			$out.= dol_nl2br($this->fieldValue);
+			$out .= dol_nl2br($this->fieldValue);
 		} elseif ($this->type == 'multiselect') {
-			$out.= $this->generateOutputFieldMultiSelect();
+			$out .= $this->generateOutputFieldMultiSelect();
 		} elseif ($this->type == 'select') {
-			$out.= $this->generateOutputFieldSelect();
+			$out .= $this->generateOutputFieldSelect();
 		} elseif ($this->type == 'selectUser') {
-			$out.= $this->generateOutputFieldSelectUser();
-		} elseif ($this->type== 'html') {
-			$out.=  $this->fieldValue;
-		} elseif ($this->type== 'color') {
-			$out.=  $this->generateOutputFieldColor();
+			$out .= $this->generateOutputFieldSelectUser();
+		} elseif ($this->type == 'html') {
+			$out .=  $this->fieldValue;
+		} elseif ($this->type == 'color') {
+			$out .=  $this->generateOutputFieldColor();
 		} elseif ($this->type == 'yesno') {
 			if (!empty($conf->use_javascript_ajax)) {
-				$out.= ajax_constantonoff($this->confKey);
+				$out .= ajax_constantonoff($this->confKey);
 			} else {
 				if ($this->fieldValue == 1) {
-					$out.= $langs->trans('yes');
+					$out .= $langs->trans('yes');
 				} else {
-					$out.= $langs->trans('no');
+					$out .= $langs->trans('no');
 				}
 			}
 		} elseif (preg_match('/emailtemplate:/', $this->type)) {
@@ -1112,10 +1124,10 @@ class FormSetupItem
 				if (is_numeric($template) && $template < 0) {
 					$this->setErrors($formmail->errors);
 				}
-				$out.= $this->langs->trans($template->label);
+				$out .= $this->langs->trans($template->label);
 			}
 		} elseif (preg_match('/category:/', $this->type)) {
-			require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
+			require_once DOL_DOCUMENT_ROOT . '/categories/class/categorie.class.php';
 			$c = new Categorie($this->db);
 			$result = $c->fetch($this->fieldValue);
 			if ($result < 0) {
@@ -1126,29 +1138,29 @@ class FormSetupItem
 			foreach ($ways as $way) {
 				$toprint[] = '<li class="select2-search-choice-dolibarr noborderoncategories"' . ($c->color ? ' style="background: #' . $c->color . ';"' : ' style="background: #bbb"') . '>' . $way . '</li>';
 			}
-			$out.='<div class="select2-container-multi-dolibarr" style="width: 90%;"><ul class="select2-choices-dolibarr">' . implode(' ', $toprint) . '</ul></div>';
+			$out .= '<div class="select2-container-multi-dolibarr" style="width: 90%;"><ul class="select2-choices-dolibarr">' . implode(' ', $toprint) . '</ul></div>';
 		} elseif (preg_match('/thirdparty_type/', $this->type)) {
-			if ($this->fieldValue==2) {
-				$out.= $this->langs->trans("Prospect");
-			} elseif ($this->fieldValue==3) {
-				$out.= $this->langs->trans("ProspectCustomer");
-			} elseif ($this->fieldValue==1) {
-				$out.= $this->langs->trans("Customer");
-			} elseif ($this->fieldValue==0) {
-				$out.= $this->langs->trans("NorProspectNorCustomer");
+			if ($this->fieldValue == 2) {
+				$out .= $this->langs->trans("Prospect");
+			} elseif ($this->fieldValue == 3) {
+				$out .= $this->langs->trans("ProspectCustomer");
+			} elseif ($this->fieldValue == 1) {
+				$out .= $this->langs->trans("Customer");
+			} elseif ($this->fieldValue == 0) {
+				$out .= $this->langs->trans("NorProspectNorCustomer");
 			}
 		} elseif ($this->type == 'product') {
-			require_once DOL_DOCUMENT_ROOT.'/product/class/product.class.php';
+			require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
 
 			$product = new Product($this->db);
 			$resprod = $product->fetch($this->fieldValue);
 			if ($resprod > 0) {
-				$out.= $product->ref;
+				$out .= $product->ref;
 			} elseif ($resprod < 0) {
 				$this->setErrors($product->errors);
 			}
 		} else {
-			$out.= $this->fieldValue;
+			$out .= $this->fieldValue;
 		}
 
 		return $out;
@@ -1171,7 +1183,7 @@ class FormSetupItem
 		if (!empty($TSelected)) {
 			foreach ($TSelected as $selected) {
 				if (!empty($this->fieldOptions[$selected])) {
-					$outPut.= dolGetBadge('', $this->fieldOptions[$selected], 'info').' ';
+					$outPut .= dolGetBadge('', $this->fieldOptions[$selected], 'info') . ' ';
 				}
 			}
 		}
@@ -1185,7 +1197,7 @@ class FormSetupItem
 	 */
 	public function generateOutputFieldColor()
 	{
-		$this->fieldAttr['disabled']=null;
+		$this->fieldAttr['disabled'] = null;
 		return $this->generateInputField();
 	}
 	/**
@@ -1195,7 +1207,7 @@ class FormSetupItem
 	 */
 	public function generateInputFieldColor()
 	{
-		$this->fieldAttr['type']= 'color';
+		$this->fieldAttr['type'] = 'color';
 		return $this->generateInputFieldText();
 	}
 
@@ -1284,7 +1296,7 @@ class FormSetupItem
 	 */
 	public function setAsEmailTemplate($templateType)
 	{
-		$this->type = 'emailtemplate:'.$templateType;
+		$this->type = 'emailtemplate:' . $templateType;
 		return $this;
 	}
 
@@ -1341,7 +1353,7 @@ class FormSetupItem
 	 */
 	public function setAsCategory($catType)
 	{
-		$this->type = 'category:'.$catType;
+		$this->type = 'category:' . $catType;
 		return $this;
 	}
 
