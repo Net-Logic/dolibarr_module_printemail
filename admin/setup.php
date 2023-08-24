@@ -89,14 +89,7 @@ $setupnotempty = 0;
 // Set this to 1 to use the factory to manage constants. Warning, the generated module will be compatible with version v15+ only
 $useFormSetup = 1;
 
-if (!class_exists('FormSetup')) {
-	// For retrocompatibility Dolibarr < 16.0
-	if (floatval(DOL_VERSION) < 16.0 && !class_exists('FormSetup')) {
-		require_once __DIR__ . '/../backport/v16/core/class/html.formsetup.class.php';
-	} else {
-		require_once DOL_DOCUMENT_ROOT . '/core/class/html.formsetup.class.php';
-	}
-}
+require_once DOL_DOCUMENT_ROOT . '/core/class/html.formsetup.class.php';
 
 $formSetup = new FormSetup($db);
 
