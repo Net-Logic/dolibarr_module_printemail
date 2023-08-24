@@ -6,3 +6,8 @@
 Settings=Ajustes
 About=Acerca de
 PrintEmailDesc=Este controlador permite enviar documentos directamente a una impresora. Requiere una impresora que pueda recibir el documento por correo electrónico.
+ModulePrintemailName=ImprimirCorreo electrónico
+ModulePrintemailDesc=Este módulo permite enviar documentos directamente a una impresora. Requiere una impresora que pueda recibir el documento por correo electrónico.
+PrintemailSetup=Configuración de correo electrónico de impresión
+PrintemailAbout=Acerca de Printemail
+PrintemailAboutPage=Imprimir correo electrónico sobre la página

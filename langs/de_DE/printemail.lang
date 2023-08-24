@@ -6,3 +6,8 @@
 Settings=Einstellungen
 About=Um
 PrintEmailDesc=Mit diesem Treiber können Dokumente direkt an einen Drucker gesendet werden. Es ist ein Drucker erforderlich, der das Dokument per E-Mail empfangen kann.
+ModulePrintemailName=DruckenEmail
+ModulePrintemailDesc=Mit diesem Modul können Dokumente direkt an einen Drucker gesendet werden. Es ist ein Drucker erforderlich, der das Dokument per E-Mail empfangen kann.
+PrintemailSetup=Printemail-Einrichtung
+PrintemailAbout=Über Printemail
+PrintemailAboutPage=Drucken Sie eine E-Mail über die Seite

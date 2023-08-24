@@ -21,3 +21,7 @@ ModulePrintemailName = Printemail
 PrintemailSetup = Printemail setup
 Settings = Settings
 PrintEmailDesc=This driver allows documents to be sent directly to a printer. It requires a printer that can receive the document by email.
+ModulePrintemailDesc=This module allows documents to be sent directly to a printer. It requires a printer that can receive the document by email.
+About=About
+PrintemailAbout=About Printemail
+PrintemailAboutPage=Printemail about page

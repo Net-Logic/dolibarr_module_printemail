@@ -6,3 +6,8 @@
 Settings=Impostazioni
 About=Di
 PrintEmailDesc=Questo driver consente di inviare i documenti direttamente a una stampante. Richiede una stampante in grado di ricevere il documento via e-mail.
+ModulePrintemailName=StampaE-mail
+ModulePrintemailDesc=Questo modulo consente di inviare i documenti direttamente a una stampante. Richiede una stampante in grado di ricevere il documento via e-mail.
+PrintemailSetup=Impostazione Printemail
+PrintemailAbout=A proposito di Printemail
+PrintemailAboutPage=Printemail sulla pagina

@@ -6,3 +6,8 @@
 Settings=Ustawienia
 About=O
 PrintEmailDesc=Ten sterownik umożliwia wysyłanie dokumentów bezpośrednio do drukarki. Wymaga drukarki, która może odebrać dokument pocztą elektroniczną.
+ModulePrintemailName=DrukujE-mail
+ModulePrintemailDesc=Moduł ten pozwala na przesłanie dokumentów bezpośrednio do drukarki. Wymaga drukarki, która może odebrać dokument pocztą elektroniczną.
+PrintemailSetup=Konfiguracja Printemaila
+PrintemailAbout=O Printemailu
+PrintemailAboutPage=Printemail o stronie
