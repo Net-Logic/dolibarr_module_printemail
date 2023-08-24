@@ -17,18 +17,15 @@
 # Generic
 #
 
-# Module label 'ModuleMyModuleName'
-ModuleMyModuleName = MyModule
-# Module description 'ModuleMyModuleDesc'
-ModuleMyModuleDesc = MyModule description
+
+ModulePrintemailName = PrintEmail
+ModulePrintemailDesc = Ce module permet d'envoyer les documents directement à une imprimante. Il requiert une imprimate pouvant recevoir le document par email.
 
 #
 # Admin page
 #
 MyModuleSetup = MyModule setup
 Settings = Settings
-MyModuleSetupPage = MyModule setup page
-
 
 #
 # About page
