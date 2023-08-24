@@ -2,12 +2,7 @@
  * Language code: pl_PL
  * Generation date 2023-08-24 12:23:47
  */
-ModuleMyModuleName=MójModuł
-ModuleMyModuleDesc=Opis mojego modułu
-MyModuleSetup=Konfiguracja mojego modułu
+
 Settings=Ustawienia
-MyModuleSetupPage=Strona konfiguracji MyModule
 About=O
-MyModuleAbout=O MyModule
-MyModuleAboutPage=Strona o MyModule
 PrintEmailDesc=Ten sterownik umożliwia wysyłanie dokumentów bezpośrednio do drukarki. Wymaga drukarki, która może odebrać dokument pocztą elektroniczną.
